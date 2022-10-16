@@ -1,0 +1,54 @@
+{% extends 'ser/base.html' %}
+{% load static %}
+<html lang="en">
+    {% block content %}
+
+<head>
+    <title>Transactions</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="text-center mt-5">
+
+                    <h3 class="text-dark">Transections Detail</h3>
+                    <table class="table table-success">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Debited</th>
+                                <th>Credited</th>
+                                <th>Acc. Bal</th>
+                            </tr>
+                        </thead>
+
+                        <body>
+                            {% for i in trans %}
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.email}}</td>
+                                <td>{{i.deb_amt}}</td>
+                                <td>{{i.cr_amt}}</td>
+                                <td>{{i.ac_bal}}$</td>
+                            </tr>
+                            {% endfor %}
+                        </body>
+
+                    </table>
+                    <label id="Refresh" class="btn btn-info btn-outline-secondary"><a class="text-white"
+                            href="/transactions">Refresh</a></label>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
+</body>
+
+</html>

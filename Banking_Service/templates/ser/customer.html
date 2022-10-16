@@ -1,0 +1,88 @@
+{% extends 'ser/base.html' %}
+{% load static %}
+<html lang="en">
+    {% block content %}
+
+<head>
+    <title>Customers</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-8">
+                <section>
+                    <h3 class="text-dark text-center mt-4">Customer Details</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+
+                        <body>
+                            {% for i in customers %}
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.email}}</td>
+                                <td>{{i.avail_bal}}$</td>
+                            </tr>
+                            {% endfor %}
+                        </body>
+
+                    </table>
+                </section>
+            </div>
+
+            <div class="col-md-4 ml-0 mt-5" style="margin-bottom: 12px;">
+                <table class="ml-5">
+                    <tr>
+                        <td class="text-dark text-center" colspan="2"> <h4> SEND MONEY </h4></td>
+                    </tr>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr>   
+                                <div class="text-field">
+                                    <td> <label>Email</label></td>
+                                    <td> <input type="Email" name="semail" ></td>
+                                </div>
+                        </tr>
+                        <tr>
+                                <div class="text-field">
+                                    <td><label>Amount</label></td>
+                                    <td><input type="text" name="amt" ></td>
+                                </div>
+                        </tr>
+                        <tr>
+                            <td><label for="">Select Receiver:</label></td>
+                            <td>
+                                <select id="email" name="email">
+                                    <option value="taseenansar@gmail.com" selected disabled>----Select Reciever----</option>
+                                    {% for i in customers %}
+                                    <option value="{{i.email}}">{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center ">
+                                <input type="submit" name="submit" value="SEND" class="btn btn-success btn-outline-danger text-white">
+                                <label id="Refresh" class="btn btn-info btn-outline-secondary"><a class="text-white"
+                                    href="/customers">Refresh</a></label>
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    {% endblock %}
+</body>
+
+</html>
